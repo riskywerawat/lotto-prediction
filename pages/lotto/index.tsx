@@ -33,13 +33,14 @@ ChartJS.register(
 );
 
 ChartJS.defaults.font.size = 11;
-export default function Page({ csv }) {
+// @ts-nocheck
+export default function Page({ csv }: { csv: any }) {
   const [rows, setRows] = useState<any>({});
   const [rowsRadar, setRowsRadar] = useState<any>({});
   const fetchDataChart = async () => {
-    function countDuplicates(arr) {
-      let counts = {};
-      arr.forEach((num) => {
+    function countDuplicates(arr: any[]) {
+      let counts: any = {};
+      arr.forEach((num: any) => {
         counts[num] = counts[num] ? counts[num] + 1 : 1;
       });
       return counts;

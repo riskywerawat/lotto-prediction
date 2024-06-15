@@ -12,9 +12,11 @@ export async function readModifyWrite() {
 
         // Read CSV file and modify rows
         await new Promise<void>((resolve, reject) => {
+
             createReadStream(inputFile, "utf8")
+                // @ts-ignore
                 .pipe(csvParser())
-                .on("data", (row) => {
+                .on("data", (row: any) => {
                     // Example modification: Keep columns 0 to 7
                     const modifiedRow: any = Object.values(row)[6];
                     rows.push(modifiedRow);
@@ -22,7 +24,7 @@ export async function readModifyWrite() {
                 .on("end", () => {
                     resolve(); // Resolve the promise when parsing ends
                 })
-                .on("error", (err) => {
+                .on("error", (err: any) => {
                     reject(err); // Reject the promise on error
                 });
         });
